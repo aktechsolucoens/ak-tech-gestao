@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <title>AK Tech Gestão</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#07111f;--panel:#0d1b2d;--panel2:#12243a;--line:#203852;--blue:#16a9e8;--cyan:#65d9ff;--white:#f4f8fc;--muted:#9eb1c5;--green:#35c98a;--red:#ff7373}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#050b13,#09182a 60%,#07111f);color:var(--white);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+    button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+    .wrap{max-width:1200px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+    .brand{display:flex;align-items:center;gap:14px}.brand img{width:72px;height:56px;object-fit:cover;object-position:center;border-radius:10px;border:1px solid #254966}
+    h1{font-size:21px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:4px}
+    .pill{border:1px solid #245273;color:var(--cyan);padding:7px 11px;border-radius:999px;font-size:12px}
+    .card{background:rgba(13,27,45,.94);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 12px 35px #0003}
+    .login{max-width:430px;margin:7vh auto}.login img{width:100%;max-height:190px;object-fit:contain;background:#000;border-radius:12px;margin-bottom:16px}
+    label{display:block;color:var(--muted);font-size:12px;margin:12px 0 6px}input,select,textarea{width:100%;background:#081525;border:1px solid #29435e;color:var(--white);padding:12px;border-radius:10px;outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--cyan)}.btn{background:linear-gradient(90deg,#087dbb,#16a9e8);border:0;color:white;padding:11px 15px;border-radius:10px;font-weight:700}
+    .btn.secondary{background:#1b3048;border:1px solid #31516e}.btn.danger{background:#6d2933}.btn.full{width:100%;margin-top:16px}
+    .muted{color:var(--muted)}.tiny{font-size:11px;color:var(--muted);line-height:1.5}.error{color:#ff9999;font-size:12px;margin-top:10px}
+    .nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.nav button{background:#10233a;border:1px solid #25415e;color:#c7d7e7;padding:10px 13px;border-radius:10px}.nav button.active{background:#087dbb;color:white;border-color:#20baf5}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metric small{color:var(--muted)}.metric strong{display:block;font-size:24px;margin-top:9px}.metric .green{color:var(--green)}.metric .red{color:var(--red)}
+    .sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 12px}.sectionhead h2{font-size:17px;margin:0}
+    .formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.formgrid .span{grid-column:1/-1}
+    table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid #20364d}th{color:var(--muted);font-weight:600}
+    .tablewrap{overflow:auto}.empty{color:var(--muted);padding:22px;text-align:center}.tag{font-size:11px;padding:4px 7px;border-radius:999px;background:#17354c;color:#8cddff}
+    .two{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.notice{background:#152a40;border:1px solid #34536d;padding:12px;border-radius:12px;color:#c9dced;font-size:12px;line-height:1.5}
+    .right{display:flex;gap:8px;align-items:center}.footer{margin:28px 0 8px;text-align:center;color:#71869c;font-size:11px}
+    @media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.wrap{padding:14px}.top{align-items:flex-start}.brand img{width:58px;height:48px}}
+    @media(max-width:480px){.grid{gap:8px}.metric strong{font-size:20px}.card{padding:14px}.formgrid{grid-template-columns:1fr}.formgrid .span{grid-column:auto}.top .pill{display:none}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section id="loginView" class="card login">
+      <img src="assets/logo-ak-tech.jpeg" alt="Logo AK Tech Soluções">
+      <h1>AK Tech Gestão</h1><p class="sub">Gestão da assistência técnica em um só lugar.</p>
+      <div class="notice" style="margin-top:14px">Para ativar o acesso online, configure primeiro o Supabase seguindo o arquivo LEIA-ME. Seus dados ficarão vinculados à sua conta.</div>
+      <form id="authForm">
+        <label>E-mail</label><input id="email" type="email" required placeholder="seu@email.com">
+        <label>Senha</label><input id="password" type="password" required minlength="6" placeholder="Mínimo de 6 caracteres">
+        <button class="btn full" type="submit" id="loginBtn">Entrar</button>
+        <button class="btn secondary full" type="button" id="signupBtn">Criar minha conta</button>
+        <div id="authMsg" class="error"></div>
+      </form>
+      <p class="tiny">Ainda não configurado? Abra o arquivo LEIA-ME incluído no pacote. Não compartilhe sua senha.</p>
+    </section>
+
+    <section id="appView" class="hidden">
+      <header class="top">
+        <div class="brand"><img src="assets/logo-ak-tech.jpeg" alt="AK Tech"><div><h1>AK Tech Gestão</h1><div class="sub">Painel de gerenciamento</div></div></div>
+        <div class="right"><span class="pill" id="userLabel">Conta conectada</span><button class="btn secondary" id="logoutBtn">Sair</button></div>
+      </header>
+      <nav class="nav">
+        <button class="active" data-tab="dashboard">Visão geral</button><button data-tab="transactions">Financeiro</button><button data-tab="clients">Clientes</button><button data-tab="orders">Ordens de serviço</button>
+      </nav>
+
+      <section id="dashboard" class="tab">
+        <div class="grid">
+          <div class="card metric"><small>Entradas recebidas no mês</small><strong id="mIncome" class="green">R$ 0,00</strong></div>
+          <div class="card metric"><small>Saídas pagas no mês</small><strong id="mExpense" class="red">R$ 0,00</strong></div>
+          <div class="card metric"><small>Resultado do mês</small><strong id="mBalance">R$ 0,00</strong></div>
+          <div class="card metric"><small>A receber</small><strong id="mReceivable">R$ 0,00</strong></div>
+        </div>
+        <div class="sectionhead"><h2>Movimentações recentes</h2><button class="btn secondary" data-goto="transactions">Ver financeiro</button></div>
+        <div class="card tablewrap"><table><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Entrada</th><th>Saída</th></tr></thead><tbody id="recentRows"></tbody></table><div id="recentEmpty" class="empty">Nenhuma movimentação registrada.</div></div>
+        <p class="tiny">O resultado mostrado é entradas recebidas menos saídas pagas no mês. Não substitui a apuração contábil.</p>
+      </section>
+
+      <section id="transactions" class="tab hidden">
+        <div class="sectionhead"><h2>Registrar movimentação</h2></div>
+        <div class="card">
+          <form id="transactionForm" class="formgrid">
+            <div><label>Data</label><input type="date" id="tDate" required></div>
+            <div><label>Movimento</label><select id="tType"><option value="entrada">Entrada</option><option value="saida">Saída</option></select></div>
+            <div class="span"><label>Descrição</label><input id="tDescription" required placeholder="Ex.: sinal troca de frontal"></div>
+            <div><label>Categoria</label><select id="tCategory"><option>Serviço</option><option>Peças e materiais</option><option>Despesa fixa</option><option>Frete/entrega</option><option>Investimento</option><option>Retirada pessoal</option><option>Outros</option></select></div>
+            <div><label>Valor (R$)</label><input id="tAmount" type="number" min="0.01" step="0.01" required placeholder="0,00"></div>
+            <div><label>Forma de pagamento</label><select id="tPayment"><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>Transferência</option><option>Boleto</option><option>Outro</option></select></div>
+            <div><label>Status</label><select id="tStatus"><option value="pago">Recebido/Pago</option><option value="pendente">Pendente</option></select></div>
+            <div class="span"><button class="btn" type="submit">Salvar movimentação</button></div>
+          </form>
+        </div>
+        <div class="sectionhead"><h2>Histórico financeiro</h2></div>
+        <div class="card tablewrap"><table><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Tipo</th><th>Valor</th><th>Status</th></tr></thead><tbody id="transactionRows"></tbody></table><div id="transactionEmpty" class="empty">Nenhuma movimentação registrada.</div></div>
+      </section>
+
+      <section id="clients" class="tab hidden">
+        <div class="sectionhead"><h2>Novo cliente</h2></div>
+        <div class="card"><form id="clientForm" class="formgrid">
+          <div><label>Nome</label><input id="cName" required placeholder="Nome do cliente"></div>
+          <div><label>WhatsApp</label><input id="cPhone" placeholder="(96) 99999-9999"></div>
+          <div class="span"><label>Observações</label><input id="cNotes" placeholder="Informações adicionais"></div>
+          <div class="span"><button class="btn" type="submit">Cadastrar cliente</button></div>
+        </form></div>
+        <div class="sectionhead"><h2>Clientes cadastrados</h2></div>
+        <div class="card tablewrap"><table><thead><tr><th>Nome</th><th>WhatsApp</th><th>Observações</th></tr></thead><tbody id="clientRows"></tbody></table><div id="clientEmpty" class="empty">Nenhum cliente cadastrado.</div></div>
+      </section>
+
+      <section id="orders" class="tab hidden">
+        <div class="sectionhead"><h2>Abrir ordem de serviço</h2></div>
+        <div class="card"><form id="orderForm" class="formgrid">
+          <div><label>Cliente</label><select id="oClient" required><option value="">Selecione um cliente</option></select></div>
+          <div><label>Modelo do aparelho</label><input id="oDevice" required placeholder="Ex.: Samsung A14"></div>
+          <div><label>Problema relatado</label><input id="oProblem" required placeholder="Ex.: tela quebrada"></div>
+          <div><label>Serviço / diagnóstico</label><input id="oService" placeholder="Ex.: troca de frontal"></div>
+          <div><label>Valor combinado (R$)</label><input id="oPrice" type="number" min="0" step="0.01" value="0"></div>
+          <div><label>Valor já recebido (R$)</label><input id="oPaid" type="number" min="0" step="0.01" value="0"></div>
+          <div><label>Status</label><select id="oStatus"><option>Recebido</option><option>Em diagnóstico</option><option>Aguardando peça</option><option>Em reparo</option><option>Pronto</option><option>Entregue</option><option>Cancelado</option></select></div>
+          <div class="span"><button class="btn" type="submit">Criar ordem de serviço</button></div>
+        </form></div>
+        <div class="sectionhead"><h2>Ordens de serviço</h2></div>
+        <div class="card tablewrap"><table><thead><tr><th>Nº</th><th>Cliente</th><th>Aparelho</th><th>Serviço</th><th>Valor</th><th>Recebido</th><th>Pendente</th><th>Status</th></tr></thead><tbody id="orderRows"></tbody></table><div id="orderEmpty" class="empty">Nenhuma ordem de serviço aberta.</div></div>
+      </section>
+      <div class="footer">AK Tech Soluções • AK Tech Gestão • Mantenha seus dados de acesso em segurança.</div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body></html>
